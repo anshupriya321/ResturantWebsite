@@ -1,0 +1,150 @@
+﻿@model List<RestaurantWebsite.Models.Menu>
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="https://kendo.cdn.telerik.com/themes/6.7.0/default/default-main.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <link href="https://kendo.cdn.telerik.com/themes/6.7.0/default/default-main.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://kendo.cdn.telerik.com/themes/6.7.0/default/default-main.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.2.829/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/6.7.0/default/default-main.css" />
+    <script src="https://kendo.cdn.telerik.com/2023.2.829/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.2.829/mjs/kendo.all.js" type="module"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+    <script src="js/kendo.all.min.js"></script>
+
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            background-color: navajowhite;
+            background-image: url("https://i.etsystatic.com/38267533/r/il/30d19e/4512184101/il_1140xN.4512184101_i4dv.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .student-data {
+            height: auto;
+            width: auto;
+            border: 4px solid green;
+            background-color: wheat;
+            margin-top:20px;
+            margin-left:50px;
+           
+        }
+
+        .k-listview-content {
+            
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #img{
+            height:180px;
+            width:230px;
+        }
+
+        #menu {
+            text-align:center;
+        }
+
+        #navbarNav{
+            margin-left:480px;
+        }
+       
+    </style>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+        <div class="container">
+           
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">  
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Cart"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/AddMenu/index">Add Menu</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-3">
+               <h2 style="color:white">Our Menus</h2>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div id="listView">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script type="text/x-kendo-template" id="template">
+        <div class="student-data">
+             <h6 id="menu"> MenuImage </h6>
+           <img src="data:menuImage/jpg;base64,#: menuImage #" alt="menuImage" id="img" />
+            <h6>MenuId: #:menuId# MenuName: #:menuName#</h6>
+
+                     <div>
+                        <a class="btn btn-success" href="/Home/SubMenuView/#:menuId#" >View SubMenu</a>
+                       
+                    </div>
+        </div>
+
+    </script>
+
+    <script>
+        var menu = @Html.Raw(Json.Serialize(Model));
+
+        console.log(menu);
+        $(function () {
+            $("#listView").kendoListView({
+                dataSource: {
+                    data: menu,
+                   
+                },
+                pageable: {
+                    pageSizes: true
+                },
+
+                template: kendo.template($("#template").html()),
+                pageable: true,
+                scrollable: false
+            });
+        });
+    </script>
+
+
+
+</body>
+</html>
+
+                    pageSize: 8

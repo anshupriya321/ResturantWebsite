@@ -1,0 +1,249 @@
+﻿@model List<RestaurantWebsite.Models.SubMenu1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="https://kendo.cdn.telerik.com/themes/6.7.0/default/default-main.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <link href="https://kendo.cdn.telerik.com/themes/6.7.0/default/default-main.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://kendo.cdn.telerik.com/themes/6.7.0/default/default-main.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.2.829/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/6.7.0/default/default-main.css" />
+    <script src="https://kendo.cdn.telerik.com/2023.2.829/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.2.829/mjs/kendo.all.js" type="module"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script src="js/kendo.all.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: navajowhite;
+            background-image: url("https://img.freepik.com/free-photo/vintage-old-rustic-cutlery-dark_1220-4886.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699228800&semt=ais");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .student-data {
+            height: auto;
+            width: auto;
+            border: 4px solid white;
+            background-color: grey;
+            margin-top: 20px;
+            margin-left: 50px;
+        }
+
+        .k-listview-content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #img {
+            height: 180px;
+            width: 330px;
+        }
+
+        #sub {
+            color: lightyellow;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        #s {
+            text-align: center;
+        }
+
+        #b {
+            margin-left: 130px;
+        }
+
+        #l {
+            margin-left: 250px;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Modal -->
+    <div class="modal fade" id="cart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Your Cart </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="cart-body">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary checkout-btn">Check Out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <div class="container" id="l">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/ListView">Menu</a>
+                    </li>
+                   
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/Home/Cart"><i class="fas fa-shopping-cart"></i> <span class="cart-items"></span> Cart</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/AddMenu/SubMenu">Add SubMenu</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <h2 style="color:white">Welcome to  Submenu</h2>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div id="listViewSubMenu">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script type="text/x-kendo-template" id="templateSubmenu">
+        <div class="student-data">
+             <h6 id="m"> SubMenu Image </h6>
+           <img src="data:subMenuImage/jpg;base64,#: subMenuImage #" alt="SubmenuImage" id="img" />
+            <h6>SubMenuId: #:subMenuId# SubMenuName: #:subMenuName#</h6>
+
+                     <div>
+                        <a class="btn btn-success" onclick="add_to_cart(#:subMenuId#)" >Add To Cart</a>
+
+                    </div>
+        </div>
+
+    </script>
+
+
+    <script>
+        var menu = @Html.Raw(Json.Serialize(Model));
+
+        console.log(menu);
+        $(function () {
+            $("#listViewSubMenu").kendoListView({
+                dataSource: {
+                    data: menu,
+
+                    pageSize: 8
+                },
+                pageable: {
+                    pageSizes: true
+                },
+
+                template: kendo.template($("#templateSubmenu").html()),
+                pageable: true,
+                scrollable: false
+            });
+        });
+    </script>
+
+
+
+    <script>
+        function add_to_cart(subMenuId) {
+
+            let cart = localStorage.getItem("cart");
+            if (cart == null) {
+                let products = menu.filter((item) => item.subMenuId === subMenuId);
+                products[0].Quantity = 1;
+                localStorage.setItem("cart", JSON.stringify(products));
+                alert("product is added first time")
+            }
+            else {
+
+                let pcart = JSON.parse(cart);
+                let oldProduct = pcart.find((item) => item.subMenuId === subMenuId)
+                if (oldProduct) {
+
+                    oldProduct.Quantity = oldProduct.Quantity + 1;
+
+                    pcart.map((item) => {
+                        if (item.subMenuId == oldProduct.subMenuId) {
+                            item.Quantity = oldProduct.Quantity;
+                        }
+                    });
+                    localStorage.setItem("cart", JSON.stringify(pcart));
+                    alert("Product Quantity increase");
+                }
+                else {
+                    let products = menu.filter((item) => item.subMenuId === subMenuId);
+                    products[0].Quantity = 1;
+                    const newData = [...pcart, ...products]
+                    localStorage.setItem("cart", JSON.stringify(newData));
+
+                    alert("Product is added ")
+
+                }
+            }
+            updatecart();
+
+        }
+
+        function updatecart() {
+            console.log("update cart");
+            let cartString = localStorage.getItem("cart");
+            let cart = JSON.parse(cartString);
+
+            if (cart == null || cart.length == 0) {
+                console.log("cart is empty");
+                $(".cart-items").html("( 0 )");
+
+
+
+            } else {
+                console.log(cart);
+
+                $(".cart-items").html(`${cart.length}`); //  ${ cart.length }
+
+
+            }
+        }
+
+        $(document).ready(function () {
+            updatecart();
+        });
+
+    </script>
+
+</body>
+</html>
+

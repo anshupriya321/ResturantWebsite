@@ -1,0 +1,53 @@
+﻿@model RestaurantWebsite.Models.User
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Restaurant Name</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css"> <!-- Create a custom CSS file for your styles -->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: navajowhite   ;
+            background-image: url("https://images.unsplash.com/32/Mc8kW4x9Q3aRR3RkP5Im_IMG_4417.jpg?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        }
+
+        #img {
+            width: 1010px;
+            height: 460px;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="jumbotron text-center">
+        <h1>Welcome to Our Restaurant</h1>
+        <p>Enjoy Delicious Meals in a Cozy Atmosphere</p>
+        <a href="/Home/ListView" class="btn btn-primary btn-lg m-3">View Menu</a>
+
+
+        <div class="container">
+            <div class="row">
+                <!-- Restaurant Image -->
+                <div class="col-md-6 restaurant-image">
+                    <img src="/images/image1.png" id="img" />
+                </div>
+           </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

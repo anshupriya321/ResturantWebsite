@@ -1,0 +1,39 @@
+﻿@model RestaurantWebsite.Models.SubMenu1;
+
+@{
+}
+
+<h1>Add SubMenu</h1>
+<form method="post" action="SubMenu" class="mt-5" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label for="" class="form-label">Id</label>
+        <input type="text" class="form-control" id="Id" asp-for="SubMenuId">
+
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Name</label>
+        <input type="text" class="form-control" id="Name" asp-for="SubMenuName">
+
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Image</label>
+        <input type="file" class="form-control" id="files" asp-for="SubMenuImage">
+
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Price</label>
+        <input type="text" class="form-control" id="Price" asp-for="Price">
+
+    </div>
+
+    <div class="mb-3">
+
+        <input type="submit" value="create" id="files" class="btn btn-danger" aria-describedby="emailHelp">
+
+    </div>
+
+
+</form>
+
